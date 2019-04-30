@@ -3,16 +3,6 @@
 
 var React = require("react");
 
-exports.createRef = React.createRef;
-
-exports.getRef_ = function(Nothing, Just, ref) {
-  if (ref.current) {
-    return Just(ref.current);
-  } else {
-    return Nothing();
-  }
-}
-
 function createClass(baseClass) {
   function bindProperty(instance, prop, value) {
     switch (prop) {

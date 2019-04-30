@@ -32,9 +32,6 @@ module React
   , pureComponentWithDerivedState
   , statelessComponent
   , ReactClass
-  , ReactRef
-  , createRef
-  , getRef
   , getProps
   , getState
   , setState
@@ -76,9 +73,7 @@ import Effect.Uncurried (EffectFn1)
 import Prim.Row as Row
 import Type.Row (type (+))
 import Unsafe.Coerce (unsafeCoerce)
-import Web.HTML.HTMLElement (HTMLElement)
-import Data.Maybe (Maybe(..))
-import Data.Function.Uncurried (Fn3, runFn3)
+import React.Ref (Ref, ReactInstance)
 
 -- | Name of a tag.
 type TagName = String
@@ -256,17 +251,6 @@ foreign import data ReactClass :: Type -> Type
 
 foreign import fragment :: ReactClass { children :: Children }
 
--- | Type for React refs. This type is opaque, but you can use `Data.Foreign`
--- | and `DOM` to validate the underlying representation.
-foreign import data ReactRef :: Type
-
-foreign import createRef :: Effect ReactRef
-
-foreign import getRef_ :: Fn3 (forall x. Maybe x) (forall x. x -> Maybe x) ReactRef (Maybe HTMLElement)
-
-getRef :: ReactRef -> Maybe HTMLElement
-getRef ref = runFn3 getRef_ Nothing Just ref
-
 -- | Read the component props.
 foreign import getProps :: forall props state.
   ReactThis props state ->
@@ -350,8 +334,9 @@ foreign import forceUpdateWithCallback :: forall props state.
 class ReactPropFields (required :: # Type) (given :: # Type)
 
 type ReservedReactPropFields r =
-  ( key :: String
-  , ref :: ReactRef
+  ( key         :: String
+  , ref         :: Ref ReactInstance
+  , callbackRef :: Ref ReactInstance -> Effect Unit
   | r
   )
 

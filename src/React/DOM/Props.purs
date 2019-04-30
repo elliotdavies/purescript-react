@@ -2,10 +2,9 @@ module React.DOM.Props where
 
 import Prelude
 
-import Data.Nullable (Nullable)
 import Effect (Effect)
 import Effect.Uncurried (mkEffectFn1)
-import React (ReactRef)
+import React.Ref (Ref, ReactInstance)
 import React.SyntheticEvent
   ( SyntheticEvent
   , SyntheticAnimationEvent
@@ -20,6 +19,7 @@ import React.SyntheticEvent
   , SyntheticUIEvent
   , SyntheticWheelEvent
   )
+import Web.HTML.HTMLElement (HTMLElement)
 
 foreign import data Props :: Type
 
@@ -894,8 +894,12 @@ onScrollCapture f = unsafeMkProps "onScrollCapture" (mkEffectFn1 f)
 onWheelCapture :: (SyntheticWheelEvent -> Effect Unit) -> Props
 onWheelCapture f = unsafeMkProps "onWheelCapture" (mkEffectFn1 f)
 
-ref :: ReactRef -> Props
+-- Ref attributes
+ref :: Ref HTMLElement -> Props
 ref = unsafeMkProps "ref"
+
+callbackRef :: (Ref ReactInstance -> Effect Unit) -> Props
+callbackRef = unsafeMkProps "ref"
 
 suppressContentEditableWarning :: Boolean -> Props
 suppressContentEditableWarning = unsafeMkProps "suppressContentEditableWarning"
