@@ -67,6 +67,7 @@ module React
 
 import Prelude
 
+import Data.Nullable (Nullable)
 import Effect (Effect)
 import Effect.Exception (Error)
 import Effect.Uncurried (EffectFn1)
@@ -336,7 +337,7 @@ class ReactPropFields (required :: # Type) (given :: # Type)
 type ReservedReactPropFields r =
   ( key         :: String
   , ref         :: Ref ReactInstance
-  , callbackRef :: Ref ReactInstance -> Effect Unit
+  , callbackRef :: Nullable ReactInstance -> Effect Unit
   | r
   )
 

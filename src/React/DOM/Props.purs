@@ -2,6 +2,7 @@ module React.DOM.Props where
 
 import Prelude
 
+import Data.Nullable (Nullable)
 import Effect (Effect)
 import Effect.Uncurried (mkEffectFn1)
 import React.Ref (Ref, ReactInstance)
@@ -898,7 +899,7 @@ onWheelCapture f = unsafeMkProps "onWheelCapture" (mkEffectFn1 f)
 ref :: Ref HTMLElement -> Props
 ref = unsafeMkProps "ref"
 
-callbackRef :: (Ref ReactInstance -> Effect Unit) -> Props
+callbackRef :: (Nullable ReactInstance -> Effect Unit) -> Props
 callbackRef = unsafeMkProps "ref" <<< mkEffectFn1
 
 suppressContentEditableWarning :: Boolean -> Props
