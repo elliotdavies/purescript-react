@@ -899,7 +899,7 @@ ref :: Ref HTMLElement -> Props
 ref = unsafeMkProps "ref"
 
 callbackRef :: (Ref ReactInstance -> Effect Unit) -> Props
-callbackRef = unsafeMkProps "ref"
+callbackRef = unsafeMkProps "ref" <<< mkEffectFn1
 
 suppressContentEditableWarning :: Boolean -> Props
 suppressContentEditableWarning = unsafeMkProps "suppressContentEditableWarning"
