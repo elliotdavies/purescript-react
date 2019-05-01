@@ -337,7 +337,7 @@ class ReactPropFields (required :: # Type) (given :: # Type)
 type ReservedReactPropFields r =
   ( key         :: String
   , ref         :: Ref ReactInstance
-  , callbackRef :: Nullable ReactInstance -> Effect Unit
+  , callbackRef :: SyntheticEventHandler (Nullable ReactInstance)
   | r
   )
 
