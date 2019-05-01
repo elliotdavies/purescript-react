@@ -23,10 +23,14 @@
     "purescript-exceptions": "^4.0.0",
     "purescript-maybe": "^4.0.0",
     "purescript-nullable": "^4.0.0",
-    "purescript-typelevel-prelude": "^3.0.0"
+    "purescript-typelevel-prelude": "^3.0.0",
+    "purescript-record": "^2.0.0"
   },
   "devDependencies": {
     "purescript-console": "^4.1.0",
     "purescript-psci-support": "^4.0.0"
+  },
+  "resolutions": {
+    "purescript-typelevel-prelude": "^4.0.0"
   }
 }

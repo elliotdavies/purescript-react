@@ -21,6 +21,26 @@ foreign import data Ref :: Type -> Type
 
 ------
 
+
+data InstanceRef
+  = InstanceRefObject (ObjectRef ReactInstance)
+  | InstanceRefCallback (ReactInstance -> Effect Unit)
+
+withRef :: ObjectRef ReactInstance -> InstanceRef
+withRef = InstanceRefObject
+
+withCallbackRef :: (ReactInstance -> Effect Unit) -> InstanceRef
+withCallbackRef = InstanceRefCallback
+
+unpackInstanceRef :: forall a. (forall b. b -> a) -> InstanceRef -> a
+unpackInstanceRef f = case _ of
+  InstanceRefObject obj -> f obj
+  InstanceRefCallback g -> f g
+
+
+-----
+
+
 foreign import createRef :: forall a. Effect (Ref a)
 
 
